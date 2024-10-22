@@ -1,0 +1,10 @@
+protoc --js_out=import_style=commonjs,binary:. \
+       --grpc-web_out=import_style=commonjs,mode=grpcwebtext:. \
+       greeter.proto
+
+npm install grpc-web google-protobuf   
+
+envoy -c envoy.yaml
+
+sudo docker build -t envoy:v1 .  
+docker run -p 8080:80 sampleapp:v1
